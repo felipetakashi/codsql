@@ -1,0 +1,46 @@
+
+-- Script SQL
+
+ 
+
+-- Drops das tabelas (caso existam)
+DROP TABLE IF EXISTS Pedidos;
+DROP TABLE IF EXISTS Clientes;
+
+ 
+
+-- Criação da tabela Clientes
+CREATE TABLE Clientes (
+    id INT PRIMARY KEY,
+    nome VARCHAR(50)
+);
+
+ 
+
+-- Criação da tabela Pedidos com chave estrangeira
+CREATE TABLE Pedidos (
+    id INT PRIMARY KEY,
+    cliente_id INT,
+    valor DECIMAL(10, 2),
+    FOREIGN KEY (cliente_id) REFERENCES Clientes(id)
+);
+
+ 
+
+-- Inserção de dados na tabela Clientes
+INSERT INTO Clientes (id, nome) VALUES (1, 'João Silva');
+INSERT INTO Clientes (id, nome) VALUES (2, 'Maria Santos');
+
+ 
+
+-- Inserção de dados na tabela Pedidos
+INSERT INTO Pedidos (id, cliente_id, valor) VALUES (1, 1, 100.00);
+INSERT INTO Pedidos (id, cliente_id, valor) VALUES (2, 2, 150.50);
+
+ 
+
+-- Tentativa de inserção de um pedido com cliente inexistente (deverá falhar)
+INSERT INTO Pedidos (id, cliente_id, valor) VALUES (3, 99, 200.00);
+
+
+ 
